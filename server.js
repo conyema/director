@@ -10,7 +10,7 @@ app.use((req, res, next) => {
 
 app.get('/currencies', (req, res) => {
   request(
-    { url: 'http://apilayer.net/api/live?access_key=4f43e92e9d68749f75c7cd58f101eae1' },
+    { url: `http://apilayer.net/api/live?access_key=${process.env.access_key}` },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
         return res.status(500).json({ type: 'error', message: err.message });
