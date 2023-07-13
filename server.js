@@ -1,12 +1,16 @@
 const express = require('express');
 const request = require('request');
 
+const errorHandler = require("./utils/errorHandler");
+
 const app = express();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
+
+
 
 app.get('/currencies', (req, res) => {
   request(
@@ -21,5 +25,11 @@ app.get('/currencies', (req, res) => {
   )
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+// Default error handler
+app.use(errorHandler);
+
+// Start app server
+app.listen(port, () => {
+  // debug(`Api server running on port ${port}.`);
+  debug(`Server running on port ${port}.`);
+});
