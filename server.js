@@ -1,29 +1,48 @@
-const express = require('express');
-const request = require('request');
+const cors = require("cors");
+const express = require("express");
+const debug = require('debug')('app:server');
+const logger = require("morgan");
+const helmet = require("helmet");
+
 
 const errorHandler = require("./utils/errorHandler");
+const api = require("./api");
+
+
+// Environment configuration
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config();
+// }
 
 const app = express();
+const port = process.env.PORT || 4000;
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
+
+// Middlewares for production env.
+app.use(helmet());
+app.use(cors());
+app.use(logger('combined'));
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+
+
+// Sub-apps and routes
+app.use('/api', api);
+// app.use('/v1', api);
+// app.use('/api/v1', api);
+
+
+
+app.get('*', (req, res) => {
+  res.json({ message: 'Welcome to Owl Direction!!!' });
+  // res.redirect('/');
 });
 
-
-
-app.get('/currencies', (req, res) => {
-  request(
-    { url: `http://apilayer.net/api/live?access_key=${process.env.access_key}` },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  )
-});
 
 // Default error handler
 app.use(errorHandler);

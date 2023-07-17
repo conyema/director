@@ -14,12 +14,19 @@
   "keywords": [],
   "author": "Chinedum Onyema",
   "license": "ISC",
+  "engines": {
+    "node": ">=20.4.0"
+  },
   "bugs": {
     "url": "https://github.com/conyema/director/issues"
   },
   "homepage": "https://github.com/conyema/director#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "request": "^2.88.0"
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0"
   }
 }
