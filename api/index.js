@@ -9,7 +9,8 @@ const { getCurrencies, predictAccountOwnership } = require('./controller');
 
 
 // API routes
-application.get('/currencies', getCurrencies);
+// api.get('/currencies/:from-:to', getCurrencies);
+api.get('/currencies', getCurrencies);
 
 api.get('/account_prediction', predictAccountOwnership)
 // router.post('/account_prediction', predictAccountOwnership)
