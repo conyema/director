@@ -1,17 +1,21 @@
 {
   "name": "director",
   "version": "1.0.0",
-  "description": "a url proxy server",
+  "description": "An owl's API and proxy server",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nodemon -r dotenv/config server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/conyema/director.git"
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "express"
+  ],
   "author": "Chinedum Onyema",
   "license": "ISC",
   "engines": {
@@ -28,5 +32,9 @@
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1"
   }
 }

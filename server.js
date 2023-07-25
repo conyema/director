@@ -8,20 +8,21 @@ const helmet = require("helmet");
 const errorHandler = require("./utils/errorHandler");
 const api = require("./api");
 
-
-// Environment configuration
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config();
-// }
-
 const app = express();
-const port = process.env.PORT || 4000;
+const port = parseInt(process.env.PORT) || 4000;
+const isDevEnv = process.env.NODE_ENV !== 'production'
 
 
 // Middlewares for production env.
 app.use(helmet());
 app.use(cors());
-app.use(logger('combined'));
+
+if (isDevEnv) {
+  app.use(logger('dev'));
+} else {
+  app.use(logger('combined'));
+}
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -30,19 +31,15 @@ app.use(
 );
 
 
-
 // Sub-apps and routes
 app.use('/api', api);
 // app.use('/v1', api);
 // app.use('/api/v1', api);
 
-
-
 app.get('*', (req, res) => {
   res.json({ message: 'Welcome to Owl Direction!!!' });
   // res.redirect('/');
 });
-
 
 // Default error handler
 app.use(errorHandler);
