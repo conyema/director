@@ -4,9 +4,9 @@ const axios = require("axios");
 /* Define database and external API calls here */
 
 async function predictAccountOwnership(data) {
-  // let url = ""
+  let url = `${process.env.FIA_URL}`
   // return axios.get(url, data)
-  return 434
+  return axios.post(url, data)
 }
 
 async function getRate(from, to) {

@@ -32,10 +32,12 @@ async function predictAccountOwnership(req, res, next) {
   const dataInput = req.body;
 
   try {
-    const result = await service.predictAccountOwnership(dataInput);
+    // const result = await service.predictAccountOwnership(dataInput);
+    const { data } = await service.predictAccountOwnership(dataInput);
 
     res.status(200);
-    return res.json(result);
+    // return res.json(result);
+    return res.json(data);
 
   } catch (err) {
     debug(err);
