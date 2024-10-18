@@ -4,7 +4,7 @@ const axios = require("axios");
 /* Define database and external API calls here */
 
 async function predictAccountOwnership(data) {
-  let url = `${process.env.FIA_URL}`
+  let url = `${process.env.FIA_URL || 'http://localhost:8000/predict'}` 
   // return axios.get(url, data)
   return axios.post(url, data)
 }
